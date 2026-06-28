@@ -15,15 +15,19 @@ EXECUTE ProcessMonthlyInterest;
 
 -- Scenario 2: The bank wants to implement a bonus scheme for employees based on their performance.
 -- Question: Write a stored procedure UpdateEmployeeBonus that updates the salary of employees in a given department by adding a bonus percentage passed as a parameter.
-CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus(v_department IN VARCHAR, v_bonusPercentage IN NUMBER) IS
+CREATE OR REPLACE PROCEDURE UpdateEmployeeBonus(
+    v_department IN VARCHAR2,
+    v_bonusPercentage IN NUMBER
+)
+IS
 BEGIN
     UPDATE Employees
-    SET Salary = Salary + ( Salary * v_bonusPercentage / 100 )
-    WHERE DepartmentName = v_department AND PerformanceRating IN ('Excellent', 'Good');
+    SET Salary = Salary + (Salary * v_bonusPercentage / 100)
+    WHERE Department = v_department;
 
-    dbms_output.put_line('Employee Bonus Updated for ' || v_department || ' department with Excellent or Good PerformanceRating');
+    DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || ' Employee(s) Updated');
+
     COMMIT;
-
 END;
 /
 

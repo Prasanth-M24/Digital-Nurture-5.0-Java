@@ -3,11 +3,11 @@
 -- Question: Write a PL/SQL block that loops through all customers, checks their age, and if they are above 60, apply a 1% discount to their current loan interest rates.
 BEGIN
     FOR customer IN (
-        SELECT CustomerID, Age from Customers where Age > 60
+        SELECT CustomerID from Customers WHERE TRUNC(MONTHS_BETWEEN(SYSDATE, DOB) / 12) > 60
     )
     LOOP
-        UPDATE Customers
-        SET LoanInterestRate = LoanInterestRate - 1
+        UPDATE Loans
+        SET InterestRate = InterestRate - 1
         WHERE CustomerID = customer.CustomerID;
     END LOOP;
 
@@ -16,23 +16,29 @@ COMMIT;
 END;
 /
 
-SELECT * from Customers where Age > 60;
+SELECT * from Customers where TRUNC(MONTHS_BETWEEN(SYSDATE, DOB) /12) > 60;
 
 
 -- Scenario 2: A customer can be promoted to VIP status based on their balance.
 -- Question: Write a PL/SQL block that iterates through all customers and sets a flag IsVIP to TRUE for those with a balance over $10,000.
 BEGIN
     FOR customer IN (
-        SELECT CustomerID, BankBalance from Customers where BankBalance >= 10000
+        SELECT CustomerID, Balance FROM Customers
     )
     LOOP
-        UPDATE Customers
-        SET IsVIP = TRUE
-        where CustomerID = customer.CustomerID;
+        IF customer.Balance > 10000 THEN
+            UPDATE Customers 
+            SET IsVIP = 'Y'
+            WHERE CustomerID = customer.CustomerID;
+        ELSE
+            UPDATE Customers
+            SET IsVIP = 'N'
+            WHERE CustomerId = customer.CustomerID;
+        END IF;
+
     END LOOP;
 
-COMMIT;
-
+    COMMIT;
 END;
 /
 
@@ -42,14 +48,25 @@ SELECT * from Customers;
 -- Scenario 3: The bank wants to send reminders to customers whose loans are due within the next 30 days.
 -- Question: Write a PL/SQL block that fetches all loans due in the next 30 days and prints a reminder message for each customer.
 SET SERVEROUTPUT ON;
+SET SERVEROUTPUT ON;
+
 BEGIN
-    FOR customer IN (
-        SELECT CustomerID, CustomerName, LoanDueDate FROM Customers WHERE LoanDueDate BETWEEN SYSDATE AND SYSDATE + 30
+    FOR loan_rec IN (
+        SELECT c.CustomerID,
+               c.Name,
+               l.LoanID,
+               l.EndDate
+        FROM Customers c
+        JOIN Loans l
+        ON c.CustomerID = l.CustomerID
+        WHERE l.EndDate BETWEEN SYSDATE AND SYSDATE + 30
     )
     LOOP
-        DBMS_OUTPUT.PUT_LINE( 'Reminder: Loan for Customer ID ' || customer.CustomerID || ' (' || customer.CustomerName || ')' ||
-                            ' is due on ' || TO_CHAR(customer.LoanDueDate, 'DD-MON-YYYY'));
+        DBMS_OUTPUT.PUT_LINE(
+            'Reminder: Dear ' || loan_rec.Name ||
+            ', your Loan ID ' || loan_rec.LoanID ||
+            ' is due on ' || TO_CHAR(loan_rec.EndDate, 'DD-MON-YYYY')
+        );
     END LOOP;
-
 END;
 /

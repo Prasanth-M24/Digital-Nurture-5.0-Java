@@ -1,0 +1,25 @@
+.heading {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.course-table th,
+.course-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.course-table th {
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,28 @@
+<h1 class="heading">Welcome to the {{ portalName }}</h1>
+<p class="description">This is the home page for the student course portal. Feel free to explore the different sections of the portal.</p>
+
+
+<table class="course-table">
+  <thead>
+    <tr>
+      <th>Courses Available</th>
+      <th>Enrolled</th>
+      <th>GPA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{CoursesAvailable}}</td>
+      <td>{{Enrolled}}</td>
+      <td>{{GPA}}</td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <button [disabled]="!isPortalActive" (click)="onEnrollClick()" class="enroll-btn">Enroll Now</button>
+</div>
+<input type="text" [(ngModel)]="searchterm" class="input-field" placeholder="Search for courses..." />
+<p class = "search-term">Searching for: {{searchterm}}</p>
+
+<!-- Difference between [property] (one-way, component → DOM) and
+[(ngModel)] (two-way, DOM ↔ component)   -->

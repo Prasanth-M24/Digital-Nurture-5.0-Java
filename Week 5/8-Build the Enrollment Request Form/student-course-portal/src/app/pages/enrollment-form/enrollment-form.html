@@ -1,0 +1,24 @@
+<h1 class="form-header">Enrollment Form</h1>
+
+<div class="form-container">
+    <form #enrollForm='ngForm' (ngSubmit)="onSubmit(enrollForm)" class="enrollment-form">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" name="studentName" id="name" [ngModel]="studentName" required>
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="studentEmail" id="email" [ngModel]="studentEmail" required>
+        <label for="course" class="form-label">Course ID:</label>
+        <input type="number" name="courseId" id="course" [ngModel]="courseId" required>
+        <label for="semester" class="form-label">Preferred Semester:</label>
+        <select name="preferredSemester" id="semester" [ngModel]="preferredSemester" required class="form-select">
+            <option value="Odd">Odd</option>
+            <option value="Even">Even</option>
+        </select>
+        <div class="terms-container">
+            <input type="checkbox" id="agreeToTerms" name="agreeToTerms" [ngModel]="agreeToTerms" required>
+            <label for="agreeToTerms">
+                I agree to the <a href="#">Terms and Conditions</a>
+            </label>
+        </div>
+        <button type="submit" [disabled]="enrollForm.invalid" class="form-button">Submit</button>
+    </form>
+</div>

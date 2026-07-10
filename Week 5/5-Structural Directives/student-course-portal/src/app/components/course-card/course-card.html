@@ -1,0 +1,34 @@
+<div class="course-card-container">
+  <div class="course-card">
+    <div class="course-details">
+      <div class="course-header">
+        <h2 class="course-id">Course ID: {{ course.id }}</h2>
+        <h2 class="course-name">{{ course.name }}</h2>
+      </div>
+      <p class="course-code">Code: {{ course.code }}</p>
+      <p class="course-credits">Credits: {{ course.credits }}</p>
+      <div [ngSwitch]="course.gradeStatus">
+
+        <span *ngSwitchCase="'passed'" class="badge passed">
+          Passed
+        </span>
+
+        <span *ngSwitchCase="'failed'" class="badge failed">
+          Failed
+        </span>
+
+        <span *ngSwitchCase="'pending'" class="badge pending">
+          Pending
+        </span>
+
+        <span *ngSwitchDefault>
+          Unknown
+        </span>
+
+      </div>
+    </div>  
+    <div class="enroll-section">
+      <button [disabled]="!isPortalActive" (click)="enrollRequested.emit(course.id)" class="enroll-btn">Enroll Now</button>
+    </div>
+  </div>
+</div>

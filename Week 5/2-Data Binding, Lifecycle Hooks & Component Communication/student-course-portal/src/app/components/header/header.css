@@ -1,0 +1,37 @@
+.header {
+  background-color: #f0f0f0;
+  padding: 0px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-info {
+  margin-bottom: 0px;
+}
+
+.header-links {
+  list-style: none;
+  font-size: 19px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  text-decoration: none;
+}
+
+.header-links li {
+  margin: 0 20px;
+}
+
+.header-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.header-links a.active {
+  color: #007bff;
+}
+
+

@@ -1,0 +1,13 @@
+.student-profile {
+    padding: 20px;
+}
+
+.enrolled-courses {
+    list-style-type: none;
+    padding: 0;
+}
+
+.enrolled-courses li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}

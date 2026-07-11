@@ -1,0 +1,10 @@
+<p>course-summary-widget works!</p>
+
+<div *ngIf="courses.length > 0">
+  <h3>Course Summary</h3>
+  <ul>
+    <li *ngFor="let course of courses ; trackBy: trackByCourseId">
+      {{ course.name }} ({{ course.code }}) - Credits: {{ course.credits }} - Grade Status: {{ course.gradeStatus }} - Enrolled: {{ course.enrolled }}
+    </li>
+  </ul>
+</div>

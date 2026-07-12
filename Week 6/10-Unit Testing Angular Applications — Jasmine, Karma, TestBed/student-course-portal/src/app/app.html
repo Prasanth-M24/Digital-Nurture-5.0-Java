@@ -1,0 +1,7 @@
+<app-header></app-header>
+@if (loadingService.isLoading$ | async) {
+	<div class="global-loading" role="status" aria-live="polite">
+		Loading HTTP data...
+	</div>
+}
+<router-outlet></router-outlet>

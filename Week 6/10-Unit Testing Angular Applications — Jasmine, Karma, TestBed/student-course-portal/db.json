@@ -1,0 +1,59 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "name": "Angular Basics",
+      "code": "ANG101",
+      "credits": 3,
+      "gradeStatus": "passed",
+      "enrolled": true,
+      "students": [
+        "Ava",
+        "Noah"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "React Fundamentals (Updated)",
+      "code": "REACT201",
+      "credits": 4,
+      "gradeStatus": "pending",
+      "enrolled": false,
+      "students": [
+        "Mia"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Vue.js Essentials (Updated)",
+      "code": "VUE301",
+      "credits": 5,
+      "gradeStatus": "failed",
+      "enrolled": false,
+      "students": []
+    },
+    {
+      "id": "4",
+      "name": "Node.js for Beginners",
+      "code": "NODE401",
+      "credits": 4,
+      "gradeStatus": "pending",
+      "enrolled": false,
+      "students": [
+        "Liam",
+        "Emma"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Python for Data Science",
+      "code": "PYDS501",
+      "credits": 3,
+      "gradeStatus": "passed",
+      "enrolled": true,
+      "students": [
+        "Olivia"
+      ]
+    }
+  ]
+}

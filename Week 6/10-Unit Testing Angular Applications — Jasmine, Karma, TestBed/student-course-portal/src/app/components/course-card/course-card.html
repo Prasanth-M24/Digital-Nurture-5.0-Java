@@ -1,0 +1,47 @@
+<div class="course-card-container" *ngIf="enrolledIds$ | async as enrolledIds">
+  <div
+    class="course-card"
+    [ngClass]="{ enrolled: enrolledIds.includes(course.id), expanded: isExpanded }"
+    (click)="viewCourse(course)"
+    [ngStyle]="{
+      'border-left':
+        course.gradeStatus === 'passed'
+          ? '6px solid green'
+          : course.gradeStatus === 'failed'
+          ? '6px solid red'
+          : '6px solid gray'
+    }"
+  >
+
+    <div class="course-details">
+      <div class="course-header">
+        <h2 class="course-id">Course ID: {{ course.id }}</h2>
+        <h2 class="course-name"> {{ course.name }}</h2>
+      </div>
+      <button class="details-btn" (click)="toggleDetails(); $event.stopPropagation()">
+        {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+      </button>
+
+      <p class="course-code">Code: {{ course.code }}</p>
+
+      <p class="course-credits">Credits: {{ course.credits | creditLabel }}</p>
+
+      <div [ngSwitch]="course.gradeStatus">
+        <span *ngSwitchCase="'passed'" class="badge passed">Passed</span>
+        <span *ngSwitchCase="'failed'" class="badge failed">Failed</span>
+        <span *ngSwitchCase="'pending'" class="badge pending">Pending</span>
+        <span *ngSwitchDefault>Unknown</span>
+      </div>
+    </div>
+
+    <div class="enroll-section">
+      <button
+        class="enroll-btn"
+        [disabled]="!isPortalActive"
+        (click)="onEnrollmentToggle(enrolledIds.includes(course.id), $event)">
+        {{ enrolledIds.includes(course.id) ? 'Unenroll' : 'Enroll' }}
+      </button>
+    </div>
+
+  </div>
+</div>

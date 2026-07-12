@@ -1,0 +1,26 @@
+.student-profile {
+    padding: 20px;
+}
+
+.enrolled-courses {
+    list-style-type: none;
+    padding: 0;
+    margin: 16px 0 0;
+}
+
+.enrolled-courses li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.course-name {
+    font-weight: 600;
+}
+
+.course-meta {
+    color: #666;
+    font-size: 0.95rem;
+}

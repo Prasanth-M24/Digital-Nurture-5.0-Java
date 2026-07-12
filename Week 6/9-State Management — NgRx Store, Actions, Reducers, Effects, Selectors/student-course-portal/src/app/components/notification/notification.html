@@ -1,0 +1,11 @@
+<h2 class="notification-heading">Notifications</h2>
+
+<button (click)="addNotification()" class="add-notification-btn">
+  Add Notification
+</button>
+
+<ul class="notification-list">
+  <li *ngFor="let notification of notifications$ | async">
+    {{ notification }}
+  </li>
+</ul>

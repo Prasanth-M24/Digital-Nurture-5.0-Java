@@ -1,0 +1,35 @@
+<h2>Course List</h2>
+<!-- <app-course-card [course]="course1"></app-course-card>
+<app-course-card [course]="course2"></app-course-card>
+<app-course-card [course]="course3"></app-course-card>
+<app-course-card [course]="course4"></app-course-card>
+<app-course-card [course]="course5"></app-course-card> -->
+<p *ngIf="isLoading">Loading courses...</p>
+<p *ngIf="errorMessage">{{ errorMessage }}</p>
+<p *ngIf="operationMessage">{{ operationMessage }}</p>
+<div>
+    <input type="text" placeholder="Search courses..." [(ngModel)]="searchTerm"/>
+    <button (click)="searchCourse()">Search</button>
+</div>
+<div *ngIf="!isLoading">
+    <div *ngIf="courses.length > 0; else noCourses">
+        <div *ngFor="let course of courses; trackBy: trackByCourseId" class="course-list-item">
+            <app-course-card appHighlight="lightblue" [course]="course" (enrollRequested)="onEnroll($any($event))" class="course-card"> </app-course-card>
+            <div class="course-actions">
+                <button type="button" (click)="updateCourse(course); $event.stopPropagation()" class="update-btn">Update Course</button>
+                <button type="button" (click)="deleteCourse(course.id); $event.stopPropagation()" class="delete-btn">Delete Course</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noCourses>
+    <p>No courses available.</p>
+</ng-template>
+
+<p *ngIf="selectedCourseId"> Selected Course ID: {{ selectedCourseId }} </p>
+
+<button (click)="addCourse()">Add Course</button>
+
+
+<h1>This is from course summary widget</h1>
+<app-course-summary-widget></app-course-summary-widget>
